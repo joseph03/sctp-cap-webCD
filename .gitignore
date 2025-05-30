@@ -1,0 +1,20 @@
+# Dependency directories
+node_modules/
+vendor/
+
+# Build artifacts
+dist/
+build/
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Secrets and configs
+.env
+config.json
+aws-credentials.json
+
+# Kubernetes configs (if containing secrets)
+kubeconfig

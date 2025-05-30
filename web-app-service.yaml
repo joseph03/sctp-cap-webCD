@@ -1,0 +1,16 @@
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+  namespace: ns-app
+spec:
+  selector:
+    app: my-app
+  ports:
+    - name: frontend
+      port: 80
+      targetPort: 3000
+    - name: backend
+      port: 5000
+      targetPort: 5000
