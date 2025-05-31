@@ -23,6 +23,7 @@ spec:
         # image: hashicorp/http-echo
         # args: ["-text", "this is frontend", "-listen", ":7766"]  # 80 has 504 time out error
         image: dkjt/frontend-static-7766
+        imagePullPolicy: Always  # Important for updates
         ports:
         - containerPort: 7766    #80 has 504 time out error.
         resources:
