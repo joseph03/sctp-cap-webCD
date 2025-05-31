@@ -19,8 +19,10 @@ spec:
       - name: frontend
         #image: nginxdemos/hello   # default to port 80, has 504 time out error error. 
                                   #Has 503 Service Temporarily Unavailable error if port 6667 is used
-        image: hashicorp/http-echo
-        args: ["-text", "this is frontend", "-listen", ":7766"]  # 80 has 504 time out error
+        # below is working
+        # image: hashicorp/http-echo
+        # args: ["-text", "this is frontend", "-listen", ":7766"]  # 80 has 504 time out error
+        image: dkjt/frontend-static-7766
         ports:
         - containerPort: 7766    #80 has 504 time out error.
         resources:
