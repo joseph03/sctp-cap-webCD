@@ -17,9 +17,10 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: nginxdemos/hello   # default to port 80, has 504 time out error error. Has 502 bad gateway error if other port is used
-        #image: hashicorp/http-echo
-        #args: ["-text", "this is frontend", "-listen", ":6666"]  # 80 has 504 time out error
+        #image: nginxdemos/hello   # default to port 80, has 504 time out error error. 
+                                  #Has 503 Service Temporarily Unavailable error if port 6667 is used
+        image: hashicorp/http-echo
+        args: ["-text", "this is frontend", "-listen", ":6666"]  # 80 has 504 time out error
         ports:
         - containerPort: 6666    #80 has 504 time out error.
         resources:
