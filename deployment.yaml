@@ -17,11 +17,11 @@ spec:
     spec:
       containers:
       - name: frontend
-        #image: nginxdemos/hello   # has 503 error. default to port 80
+        #image: nginxdemos/hello   # default to port 80. as 502 bad gateway error if other port is used
         image: hashicorp/http-echo
-        args: ["-text", "this is frontend", "-listen", ":80"]
+        args: ["-text", "this is frontend", "-listen", ":6666"]  # 80 has 504 time out error
         ports:
-        - containerPort: 80
+        - containerPort: 6666
         resources:
           limits:
             memory: "128Mi"
@@ -29,12 +29,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: 80
+            port: 6666
           initialDelaySeconds: 5
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /
-            port: 80
+            port: 6666
           initialDelaySeconds: 3
           periodSeconds: 3
