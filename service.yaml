@@ -11,4 +11,4 @@ spec:
   - name: http
     port: 80       # Service exposes this port
     targetPort: 80 # Container listens on this port
-  type: ClusterIP  # Explicitly declare service type
+  #type: ClusterIP  # Explicitly declare service type
