@@ -1,11 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-app2-ingress
+  name: my-app-ingress
   namespace: ns-app
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"  # Remove if not using TLS
 spec:
+  tls:
+  - hosts:
+    - ce-grp-3a-my-app2.sctp-sandbox.com
+    secretName: my-app-tls-secret
   rules:
   - host: ce-grp-3a-my-app2.sctp-sandbox.com
     http:
@@ -14,6 +20,20 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: my-app2-service
+            name: frontend-service
             port:
               number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-service
+            port:
+              number: 7777
+      - path: /backend
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-service
+            port:
+              number: 7777

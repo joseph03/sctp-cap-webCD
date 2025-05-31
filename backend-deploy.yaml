@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-backend
+  name: backend
   namespace: ns-app
 spec:
-  replicas: 1
+  replicas: 1  # Number of pod replicas
   selector:
     matchLabels:
-      app: test-backend
+      app: backend  # Must match the pod template labels
   template:
     metadata:
       labels:
-        app: test-backend
+        app: backend  # Must match the selector
     spec:
       containers:
       - name: backend
         image: hashicorp/http-echo
-        args: ["-text", "Hello from backend", "-listen", ":8080"]
+        args: ["-text", "Hello from backend", "-listen", ":7777"]
         ports:
-          - containerPort: 8080
+        - containerPort: 7777
         resources:
           limits:
             memory: "128Mi"
@@ -27,9 +27,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: 8080
+            port: 7777
+          initialDelaySeconds: 5
+          periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /
-            port: 8080
-
+            port: 7777
+          initialDelaySeconds: 5
+          periodSeconds: 5

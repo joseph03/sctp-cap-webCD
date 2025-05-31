@@ -1,24 +1,38 @@
+# frontend-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app2
+  name: frontend
   namespace: ns-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-app2
+      app: frontend  # Matches the pod labels below
   template:
     metadata:
       labels:
-        app: my-app2
+        app: frontend  # Must match selector
+        tier: frontend  # Additional label
     spec:
       containers:
       - name: frontend
         image: nginxdemos/hello
         ports:
-          - containerPort: 80
-      - name: backend
-        image: hashicorp/http-echo     #docker.io/kennethreitz/httpbin   #kennethreitz/httpbin:latest   hashicorp/http-echo
-        ports:
-          - containerPort: 80
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3

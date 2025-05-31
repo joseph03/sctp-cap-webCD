@@ -1,15 +1,14 @@
+# frontend-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app2-service
+  name: frontend-service
   namespace: ns-app
 spec:
   selector:
-    app: my-app2
+    app: frontend  # Matches the deployment's pod labels
   ports:
-    - name: frontend
-      port: 80
-      targetPort: 80
-    - name: backend
-      port: 5000
-      targetPort: 80
+  - name: http
+    port: 80       # Service exposes this port
+    targetPort: 80 # Container listens on this port
+  type: ClusterIP  # Explicitly declare service type
