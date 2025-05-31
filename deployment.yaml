@@ -1,4 +1,3 @@
-# frontend-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -8,37 +7,33 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend  # Matches the pod labels below
+      app: frontend
   template:
     metadata:
       labels:
-        app: frontend  # Must match selector
-        tier: frontend  # Additional label
+        app: frontend
+        tier: frontend
     spec:
       containers:
       - name: frontend
-        #image: nginxdemos/hello   # default to port 80, has 504 time out error error. 
-                                  #Has 503 Service Temporarily Unavailable error if port 6667 is used
-        # below is working
-        # image: hashicorp/http-echo
-        # args: ["-text", "this is frontend", "-listen", ":7766"]  # 80 has 504 time out error
-        image: dkjt/frontend-static-7766:latest  # Ensure this matches your push
-        imagePullPolicy: Always  # Important for updates
+        image: dkjt/frontend-static-7766:latest
+        imagePullPolicy: Always
         ports:
-        - containerPort: 7766    #80 has 504 time out error.
+        - containerPort: 3000  # Nginx port. # Must match Service's targetPort
+        - containerPort: 8080  # Node proxy port
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "100m"
+            memory: "256Mi"  # Increased from 128Mi
+            cpu: "200m"
         livenessProbe:
           httpGet:
             path: /
-            port: 7766      #80 has 504 time out error.
-          initialDelaySeconds: 5
+            port: 3000  # Changed from 7766 to match Nginx
+          initialDelaySeconds: 15  # Increased from 5
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /
-            port: 7766      #80 has 504 time out error.
-          initialDelaySeconds: 3
+            port: 3000  # Changed from 7766 to match Nginx
+          initialDelaySeconds: 5
           periodSeconds: 3
