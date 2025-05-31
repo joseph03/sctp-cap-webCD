@@ -27,7 +27,8 @@ spec:
             port:
               number: 80   # cannot use 80 ?
       - path: /api
-        pathType: Exact   # Only matches "/api" (not /api/v1, /api/test, etc.)
+        #pathType: Exact   # Only matches "/api" (not /api/v1, /api/test, etc.)
+        pathType: Prefix   # Matches "/api" and all its subpaths (e.g., /api/v1, /api/test)
         backend:
           service:
             name: backend-service
