@@ -13,8 +13,7 @@ spec:
   # - hosts:
   #   - ce-grp-3a-my-app2.sctp-sandbox.com
   #   secretName: my-app-tls-secret
-  spec:
-    ingressClassName: nginx  # Explicitly set
+  ingressClassName: nginx  # Explicitly set
   rules:
   - host: ce-grp-3a-my-app2.sctp-sandbox.com
     http:
