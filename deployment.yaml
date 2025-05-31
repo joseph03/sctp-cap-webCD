@@ -19,6 +19,6 @@ spec:
         ports:
           - containerPort: 80
       - name: backend
-        image: kennethreitz/httpbin
+        image: hashicorp/http-echo     #docker.io/kennethreitz/httpbin   #kennethreitz/httpbin:latest   hashicorp/http-echo
         ports:
           - containerPort: 80
