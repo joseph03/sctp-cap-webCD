@@ -26,14 +26,14 @@ spec:
             name: frontend-service
             port:
               number: 80 #3000 # match service's port (not targetport) #7766 #80 has 504 time out error.
-      - path: /api
+      - path: /api/detect
         pathType: Exact   # Only matches "/api" (not /api/v1, /api/test, etc.)
         #pathType: Prefix   # work. Matches "/api" and all its subpaths (e.g., /api/v1, /api/test)
         backend:
           service:
-            name: backend-service
+            name: fraud-detection
             port:
-              number: 7777
+              number: 4000 #7777
       - path: /backend
         pathType: Exact   # Only matches "/backend"
         backend:
