@@ -21,7 +21,7 @@ spec:
         #image: hashicorp/http-echo
         #args: ["-text", "this is frontend", "-listen", ":6666"]  # 80 has 504 time out error
         ports:
-        - containerPort: 80 #6666
+        - containerPort: 6666    #80 has 504 time out error.
         resources:
           limits:
             memory: "128Mi"
@@ -29,12 +29,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: 80 #6666
+            port: 6666      #80 has 504 time out error.
           initialDelaySeconds: 5
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /
-            port: 80 #6666
+            port: 6666      #80 has 504 time out error.
           initialDelaySeconds: 3
           periodSeconds: 3
