@@ -13,12 +13,15 @@ spec:
   # - hosts:
   #   - ce-grp-3a-my-app2.sctp-sandbox.com
   #   secretName: my-app-tls-secret
+  spec:
+    ingressClassName: nginx  # Explicitly set
   rules:
   - host: ce-grp-3a-my-app2.sctp-sandbox.com
     http:
       paths:
       - path: /
-        pathType: Prefix  # Matches all subpaths (e.g., /, /home, /contact)
+        #pathType: Prefix  # this has 503 error. Prefix is used ot matches all subpaths (e.g., /, /home, /contact)
+        pathType: Exact   # Only matches "/api" (not /api/v1, /api/test, etc.)
         backend:
           service:
             name: frontend-service
