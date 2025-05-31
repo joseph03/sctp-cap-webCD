@@ -17,11 +17,11 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: nginxdemos/hello   # default to port 80
+        #image: nginxdemos/hello   # has 503 error. default to port 80
+        image: hashicorp/http-echo
+        args: ["-text", "this is frontend", "-listen", ":80"]
         ports:
-        - containerPort: 6666 #80
-        command: ["/bin/sh", "-c"]
-        args: ["sed -i 's/listen 80;/listen 6666;/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]       
+        - containerPort: 80
         resources:
           limits:
             memory: "128Mi"
@@ -29,12 +29,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: 6666
+            port: 80
           initialDelaySeconds: 5
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /
-            port: 6666
+            port: 80
           initialDelaySeconds: 3
           periodSeconds: 3
