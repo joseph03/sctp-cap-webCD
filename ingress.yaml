@@ -20,5 +20,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - my-app.sctp-sandbox.com
+    - ce-grp-3a-my-app.sctp-sandbox.com
     secretName: my-app-tls
