@@ -1,28 +1,23 @@
-# deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+  name: my-app-frontend
   namespace: ns-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-app
+      app: my-app-frontend
   template:
     metadata:
       labels:
-        app: my-app
+        app: my-app-frontend
     spec:
       containers:
-      - name: frontend
-        image: ghcr.io/tech-samples/react-fraud-chatbot-ui:latest
-        ports:
-          - containerPort: 3000
-        env:
-          - name: REACT_APP_API_URL
-            value: "http://my-app-service:5000"
-      - name: backend
-        image: ghcr.io/tech-samples/fraud-chatbot-api:latest
-        ports:
-          - containerPort: 5000
+        - name: frontend
+          image: ghcr.io/tech-samples/react-fraud-chatbot-ui:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_API_URL
+              value: "/api"
