@@ -8,7 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod  # Optional (HTTPS)
 spec:
   rules:
-  - host: my-app.sctp-sandbox.com
+  - host: ce-grp-3a-my-app.sctp-sandbox.com
     http:
       paths:
       - path: /
