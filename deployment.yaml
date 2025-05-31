@@ -17,9 +17,11 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: nginxdemos/hello
+        image: nginxdemos/hello   # default to port 80
         ports:
         - containerPort: 6666 #80
+        command: ["/bin/sh", "-c"]
+        args: ["sed -i 's/listen 80;/listen 6666;/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]       
         resources:
           limits:
             memory: "128Mi"
@@ -27,12 +29,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: 6666 #80
+            port: 6666
           initialDelaySeconds: 5
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /
-            port: 6666 #80
+            port: 6666
           initialDelaySeconds: 3
           periodSeconds: 3
