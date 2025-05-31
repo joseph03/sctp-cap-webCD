@@ -18,21 +18,21 @@ spec:
     http:
       paths:
       - path: /
-        pathType: Prefix
+        pathType: Prefix  # Matches all subpaths (e.g., /, /home, /contact)
         backend:
           service:
             name: frontend-service
             port:
               number: 80
       - path: /api
-        pathType: Prefix
+        pathType: Exact   # Only matches "/api" (not /api/v1, /api/test, etc.)
         backend:
           service:
             name: backend-service
             port:
               number: 7777
       - path: /backend
-        pathType: Prefix
+        pathType: Exact   # Only matches "/backend"
         backend:
           service:
             name: backend-service
