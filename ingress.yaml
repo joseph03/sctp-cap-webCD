@@ -20,8 +20,8 @@ spec:
     http:
       paths:
       - path: /
-        #pathType: Prefix  # this has 503 error. Prefix is used ot matches all subpaths (e.g., /, /home, /contact)
-        pathType: Exact   # Only matches "/api" (not /api/v1, /api/test, etc.)
+        pathType: Prefix  # this has 503 error. Prefix is used ot matches all subpaths (e.g., /, /home, /contact)
+        #pathType: Exact   # this has 404 error. Exact is used to only matches "/api" (not /api/v1, /api/test, etc.)
         backend:
           service:
             name: frontend-service
