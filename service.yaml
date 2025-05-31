@@ -9,6 +9,6 @@ spec:
     app: frontend  # Matches the deployment's pod labels
   ports:
   - name: http #tcp    #http
-    port: 80 #6666       # 80 cannot work. Service exposes this port
-    targetPort: 80 #6666 # 80 cannot work. Container listens on this port
+    port: 6666       # 80 cannot work. Service exposes this port
+    targetPort: 6666 # 80 cannot work. Container listens on this port
   type: ClusterIP  # Explicitly declare service type
