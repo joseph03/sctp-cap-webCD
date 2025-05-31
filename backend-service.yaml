@@ -2,12 +2,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: fraud-detection
   namespace: ns-app
 spec:
   selector:
-    app: backend  # Must match the deployment's pod labels
+    app: fraud-detection
   ports:
-  - name: http
-    port: 7777
-    targetPort: 7777
+  - protocol: TCP
+    port: 4000
+    targetPort: 4000

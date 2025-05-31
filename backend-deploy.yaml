@@ -2,37 +2,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: fraud-detection
   namespace: ns-app
 spec:
-  replicas: 1  # Number of pod replicas
+  replicas: 1
   selector:
     matchLabels:
-      app: backend  # Must match the pod template labels
+      app: fraud-detection
   template:
     metadata:
       labels:
-        app: backend  # Must match the selector
+        app: fraud-detection
     spec:
       containers:
-      - name: backend
-        image: hashicorp/http-echo
-        args: ["-text", "Hello from backend", "-listen", ":7777"]
+      - name: fraud-detection
+        image: dkjt/fraud-service:latest  # Your custom fraud detection image
         ports:
-        - containerPort: 7777
+        - containerPort: 4000  # Different from frontend port
+        env:
+        - name: PORT
+          value: "4000"
         resources:
           limits:
             memory: "128Mi"
             cpu: "100m"
         livenessProbe:
           httpGet:
-            path: /
-            port: 7777
-          initialDelaySeconds: 5
-          periodSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 7777
-          initialDelaySeconds: 5
+            path: /health
+            port: 4000
+          initialDelaySeconds: 15
           periodSeconds: 5

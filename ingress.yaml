@@ -25,7 +25,7 @@ spec:
           service:
             name: frontend-service
             port:
-              number: 3000 #80 # match service's port (not targetport) #7766 #80 has 504 time out error.
+              number: 80 #3000 # match service's port (not targetport) #7766 #80 has 504 time out error.
       - path: /api
         pathType: Exact   # Only matches "/api" (not /api/v1, /api/test, etc.)
         #pathType: Prefix   # work. Matches "/api" and all its subpaths (e.g., /api/v1, /api/test)
