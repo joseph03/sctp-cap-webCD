@@ -22,8 +22,11 @@ spec:
         - containerPort: 3000  # Nginx port. # Must match Service's targetPort
         #- containerPort: 8080  # Node proxy port
         resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
           limits:
-            memory: "256Mi"  # Increased from 128Mi
+            memory: "512Mi"  # Double the request
             cpu: "200m"
         livenessProbe:
           httpGet:
