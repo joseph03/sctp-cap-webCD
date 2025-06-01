@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: dkjt/frontend-static-7766:v1.0.2  # Update version
+        image: dkjt/frontend-static-7766:v1.0.3  # Update version
         imagePullPolicy: Always
         ports:
         - containerPort: 3000  # Nginx port. # Must match Service's targetPort
