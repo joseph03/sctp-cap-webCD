@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: fraud-detection
-        image: dkjt/fraud-service:v1.0.4 #need to be updated
+        image: dkjt/fraud-service:v1.0.5 #need to be updated
         ports:
         - containerPort: 4000  # Different from frontend port
         env:
