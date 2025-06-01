@@ -18,14 +18,7 @@ spec:
   - host: ce-grp-3a-my-app2.sctp-sandbox.com
     http:
       paths:
-      - path: /
-        pathType: Prefix  # this has 503 error. Prefix is used ot matches all subpaths (e.g., /, /home, /contact)
-        #pathType: Exact   # this has 404 error. Exact is used to only matches "/api" (not /api/v1, /api/test, etc.)
-        backend:
-          service:
-            name: frontend-service
-            port:
-              number: 80 #3000 # match service's port (not targetport) #7766 #80 has 504 time out error.
+      # 1. Exact paths first
       - path: /api/detect
         pathType: Exact   # Only matches "/api" (not /api/v1, /api/test, etc.)
         #pathType: Prefix   # work. Matches "/api" and all its subpaths (e.g., /api/v1, /api/test)
@@ -34,6 +27,7 @@ spec:
             name: fraud-detection
             port:
               number: 4000 #7777
+              
       - path: /backend
         pathType: Exact   # Only matches "/backend"
         backend:
@@ -41,3 +35,13 @@ spec:
             name: backend-service
             port:
               number: 7777
+
+      # 2. Catch-all prefix last
+      - path: /
+        pathType: Prefix  # this has 503 error. Prefix is used ot matches all subpaths (e.g., /, /home, /contact)
+        #pathType: Exact   # this has 404 error. Exact is used to only matches "/api" (not /api/v1, /api/test, etc.)
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 80 #3000 # match service's port (not targetport) #7766 #80 has 504 time out error.
