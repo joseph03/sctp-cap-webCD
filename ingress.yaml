@@ -5,7 +5,7 @@ metadata:
   namespace: ns-app
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    #nginx.ingress.kubernetes.io/rewrite-target: /
     #cert-manager.io/cluster-issuer: "letsencrypt-prod"  # Remove if not using TLS
 spec:
   # tls is not required if you are not using HTTPS
