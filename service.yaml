@@ -9,6 +9,6 @@ spec:
     app: frontend  # Matches the deployment's pod labels
   ports:
   - name: http 
-    port: 7766         #80 has 504 time out error. Service exposes this port
+    port: 80    #7766 can work. Service exposes this port
     targetPort: 3000 #3000 pod's nginx port  (MUST match containerPort in Deployment) #7766   #80 has 504 time out error. Container listens on this port
   type: ClusterIP  # Explicitly declare service type
