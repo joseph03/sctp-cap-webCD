@@ -5,35 +5,24 @@ metadata:
   namespace: ns-app
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    #nginx.ingress.kubernetes.io/rewrite-target: /
-    #cert-manager.io/cluster-issuer: "letsencrypt-prod"  # Remove if not using TLS
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  # tls is not required if you are not using HTTPS
-  # tls:
-  # - hosts:
-  #   - ce-grp-3a-my-app2.sctp-sandbox.com
-  #   secretName: my-app-tls-secret
-  ingressClassName: nginx  # Explicitly set
+  ingressClassName: nginx
   rules:
   - host: ce-grp-3a-my-app2.sctp-sandbox.com
     http:
       paths:
-      # 1. Exact paths first
-      - path: /api/detect
-        pathType: Exact   # Only matches "/api" (not /api/v1, /api/test, etc.)
-        #pathType: Prefix   # work. Matches "/api" and all its subpaths (e.g., /api/v1, /api/test)
+      - path: /api
+        pathType: Prefix
         backend:
           service:
             name: fraud-detection
             port:
-              number: 4000 #7777
-
-      # 2. Catch-all prefix last
+              number: 4000
       - path: /
-        pathType: Prefix  # this has 503 error. Prefix is used ot matches all subpaths (e.g., /, /home, /contact)
-        #pathType: Exact   # this has 404 error. Exact is used to only matches "/api" (not /api/v1, /api/test, etc.)
+        pathType: Prefix
         backend:
           service:
             name: frontend-service
             port:
-              number: 80  #7766 # match service's port (not targetport)
+              number: 80

@@ -12,31 +12,16 @@ spec:
     metadata:
       labels:
         app: frontend
-        tier: frontend
     spec:
       containers:
       - name: frontend
-        image: dkjt/frontend-static-7766:v1.0.4  # Update version
-        imagePullPolicy: Always
+        image: dkjt/frontend-static-7766:v1.0.4
         ports:
-        - containerPort: 3000  # Nginx port. # Must match Service's targetPort
-        #- containerPort: 8080  # Node proxy port
+        - containerPort: 80
         resources:
           requests:
-            memory: "256Mi"
+            memory: "128Mi"
             cpu: "100m"
           limits:
-            memory: "512Mi"  # Double the request
+            memory: "256Mi"
             cpu: "200m"
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 3000  # Changed from 7766 to match Nginx
-          initialDelaySeconds: 15  # Increased from 5
-          periodSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 3000  # Changed from 7766 to match Nginx
-          initialDelaySeconds: 5
-          periodSeconds: 3

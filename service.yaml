@@ -1,4 +1,3 @@
-# frontend-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -6,9 +5,9 @@ metadata:
   namespace: ns-app
 spec:
   selector:
-    app: frontend  # Matches the deployment's pod labels
+    app: frontend
   ports:
-  - name: http 
-    port: 80    #7766 can work. Service exposes this port
-    targetPort: 3000 #3000 pod's nginx port  (MUST match containerPort in Deployment) #7766   #80 has 504 time out error. Container listens on this port
-  type: ClusterIP  # Explicitly declare service type
+  - name: http
+    port: 80
+    targetPort: 80
+  type: ClusterIP

@@ -1,11 +1,18 @@
-# backend-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fraud-detection
   namespace: ns-app
+  labels:
+    app: fraud-detection
+    tier: backend
+    version: v1.1.0  # Match your image tag
 spec:
-  replicas: 1
+  replicas: 2  # Recommended for high availability
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: fraud-detection
@@ -13,25 +20,41 @@ spec:
     metadata:
       labels:
         app: fraud-detection
+        tier: backend
+        version: v1.1.0
+      annotations:
+        prometheus.io/scrape: "true"  # For monitoring
     spec:
       containers:
       - name: fraud-detection
-        image: dkjt/fraud-service:v1.0.5 #need to be updated
+        image: dkjt/fraud-service:v1.1.0  # Updated to match our new version
+        imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 4000  # Different from frontend port
+        - containerPort: 4000
+          name: http
         env:
         - name: PORT
           value: "4000"
+        - name: NODE_ENV
+          value: "production"
+        - name: ALLOWED_ORIGINS
+          value: "https://ce-grp-3a-my-app2.sctp-sandbox.com"
         resources:
           requests:
-            memory: "256Mi"
             cpu: "100m"
+            memory: "128Mi"
           limits:
-            memory: "512Mi"  # Double the request
-            cpu: "200m"
+            cpu: "500m"
+            memory: "256Mi"
         livenessProbe:
           httpGet:
             path: /health
             port: 4000
           initialDelaySeconds: 15
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 4000
+          initialDelaySeconds: 5
           periodSeconds: 5
