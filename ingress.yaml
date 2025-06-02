@@ -4,23 +4,23 @@ metadata:
   name: my-app2-ingress
   namespace: ns-app
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
 spec:
-  ingressClassName: nginx
   rules:
   - host: ce-grp-3a-my-app2.sctp-sandbox.com
     http:
       paths:
-      - path: /api(/|$)(.*)
-        pathType: Prefix
+      - path: /api/detect
+        pathType: Exact  # Only matches EXACTLY /api/detect
         backend:
           service:
             name: fraud-detection
-            port:
+            port: 
               number: 4000
-      - path: /(.*)
-        pathType: Prefix
+      - path: /
+        pathType: Prefix  # Catches everything else
         backend:
           service:
             name: frontend-service
