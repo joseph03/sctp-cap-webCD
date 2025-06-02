@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: fraud-detection
-        image: dkjt/fraud-service:v1.1.2  # Updated to match our new version
+        image: dkjt/fraud-service:v1.1.3  # Updated to match our new version
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 4000
