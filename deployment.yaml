@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: dkjt/frontend-static-7766:v1.0.6
+        image: dkjt/frontend-static-7766:v1.0.7
         ports:
-        - containerPort: 3000 #80
+        - containerPort: 80
         resources:
           requests:
             memory: "128Mi"
