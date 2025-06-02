@@ -8,6 +8,6 @@ spec:
     app: frontend
   ports:
   - name: http
-    port: 80
-    targetPort: 80
+    port: 80           # external port exposed by the service
+    targetPort: 3000   # container port specified in the frontend deployment  
   type: ClusterIP
