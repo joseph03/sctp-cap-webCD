@@ -2,6 +2,8 @@
 
 This repository contains the Kubernetes manifests and ArgoCD configuration required to deploy my-app2, a web application consisting of a frontend and a backend fraud detection service, into a Kubernetes cluster. Deployment is managed via ArgoCD for GitOps-based continuous delivery.
 
+![alt text](image.png)
+
 ---
 
 # 🚀 Architecture
@@ -13,7 +15,7 @@ Static web app served by frontend-service on port 80
 Backed by a deployment using image:
 dkjt/frontend-static-7766:v1.0.10
 
-The frontend web page is defined[here](https://github.com/joseph03/sctp-cap-webpage?tab=readme-ov-file)
+The frontend web page is defined [here](https://github.com/joseph03/sctp-cap-webpage?tab=readme-ov-file)
 
 ## Backend
 
