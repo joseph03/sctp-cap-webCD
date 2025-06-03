@@ -58,9 +58,7 @@ GitOps with ArgoCD
 All manifests are stored in this repo. Changes are auto-synced to the cluster by ArgoCD.
 
 Ingress Routing
-NGINX Ingress exposes the app at
-ce-grp-3a-my-app2.sctp-sandbox.com
-with custom backend timeouts.
+NGINX Ingress exposes the app at ce-grp-3a-my-app2.sctp-sandbox.com with custom backend timeouts.
 
 Service Discovery
 Internal services use Kubernetes label selectors for connection between frontend and backend.
@@ -72,7 +70,13 @@ Ensure ArgoCD is installed and configured in your cluster.
 
 Apply the app2.yaml manifest to ArgoCD to begin automated deployment.
 
-Access the application via the configured Ingress host.
+Access the application via the [configured Ingress host.](https://ce-grp-3a-my-app2.sctp-sandbox.com/)
+
+## notes on image version
+Remember to update frontend (sctp-cap-webpage) and backend (sctp-cap-fraud) image version everytime there is an update to the image.
+
+update frontend image version at deployment.yaml
+update backend image version at backend-deploy.yaml
 
 # 📝 Notes
 Backend uses rolling updates for zero downtime.
