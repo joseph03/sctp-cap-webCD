@@ -49,6 +49,16 @@ deployment.yaml	Frontend deployment specification
 backend-deploy.yaml	Backend deployment specification
 app2.yaml	ArgoCD Application manifest
 
+| File                   | Purpose                                                                 |
+|------------------------|-------------------------------------------------------------------------|
+| `ingress.yaml`         | External access + path routing (`/api/detect` → backend, `/` → frontend)|
+| `service.yaml`         | Frontend service (port 80 → container 3000)                            |
+| `backend-service.yaml` | Backend service (port 4000)                                            |
+| `deployment.yaml`      | Frontend pod specs (image, resources, ports)                           |
+| `backend-deploy.yaml`  | Backend deployment (replicas, rolling updates, probes)                 |
+| `app2.yaml`            | ArgoCD app definition for automated sync                               |
+
+
 ---
 
 # 🔄 Deployment Workflow
