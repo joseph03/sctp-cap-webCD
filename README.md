@@ -13,6 +13,8 @@ Static web app served by frontend-service on port 80
 Backed by a deployment using image:
 dkjt/frontend-static-7766:v1.0.10
 
+The frontend web page is defined[here](https://github.com/joseph03/sctp-cap-webpage?tab=readme-ov-file)
+
 ## Backend
 
 Fraud detection microservice (fraud-detection)
@@ -20,6 +22,8 @@ Fraud detection microservice (fraud-detection)
 Exposed internally on port 4000
 
 Deployed with 2 replicas for high availability
+
+The backend service is defined [here](https://github.com/joseph03/sctp-cap-fraud)
 
 ## Ingress
 
@@ -72,7 +76,7 @@ Apply the app2.yaml manifest to ArgoCD to begin automated deployment.
 
 Access the application via the [configured Ingress host.](https://ce-grp-3a-my-app2.sctp-sandbox.com/)
 
-## notes on image version
+## Notes on image version
 Remember to update frontend (sctp-cap-webpage) and backend (sctp-cap-fraud) image version everytime there is an update to the image.
 
 update frontend image version at deployment.yaml
