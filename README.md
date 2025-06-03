@@ -41,14 +41,6 @@ All resources are deployed in ns-app
 Backend annotated for Prometheus scraping (/health endpoint)
 
 ## 📁 Key Files
-File	Purpose
-ingress.yaml	Configures external access and path-based routing
-service.yaml	Frontend service definition
-backend-service.yaml	Backend service definition
-deployment.yaml	Frontend deployment specification
-backend-deploy.yaml	Backend deployment specification
-app2.yaml	ArgoCD Application manifest
-
 | File                   | Purpose                                                                 |
 |------------------------|-------------------------------------------------------------------------|
 | `ingress.yaml`         | External access + path routing (`/api/detect` → backend, `/` → frontend)|
