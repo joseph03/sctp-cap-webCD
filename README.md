@@ -2,6 +2,9 @@
 
 This repository contains the Kubernetes manifests and ArgoCD configuration required to deploy my-app2, a web application consisting of a frontend and a backend fraud detection service, into a Kubernetes cluster. Deployment is managed via ArgoCD for GitOps-based continuous delivery.
 
+The eks cluster used is ce-grp-3a-uat-eks-cluster 
+It is created by uat branch of https://github.com/joseph03/sctp-cap-eks
+
 ![alt text](image.png)
 
 ---
