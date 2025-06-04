@@ -12,6 +12,21 @@ It is created by uat branch of https://github.com/joseph03/sctp-cap-eks
 
 # 🚀 Architecture
 
+## Service Architecture
+
+### Core Components
+- **Frontend**: Nginx app served on port `3000`
+- **Backend**: Fraud detection API on port `4000`
+- **Chatbot**: Separate microservice (planned)
+
+### Traffic Routing
+```mermaid
+flowchart LR
+    User -->|HTTP Request| Ingress
+    Ingress -->|/api/detect| Fraud[Fraud Detection:4000]
+    Ingress -->|/| Frontend[Frontend:3000]
+    Ingress -->|/api/chat| Chatbot[Chatbot:5000]
+
 ## Frontend
 
 Static web app served by frontend-service on port 80
