@@ -20,12 +20,7 @@ It is created by uat branch of https://github.com/joseph03/sctp-cap-eks
 - **Chatbot**: Separate microservice (planned)
 
 ### Traffic Routing
-```mermaid
-flowchart LR
-    User -->|HTTP Request| Ingress
-    Ingress -->|/api/detect| Fraud[Fraud Detection:4000]
-    Ingress -->|/| Frontend[Frontend:3000]
-    Ingress -->|/api/chat| Chatbot[Chatbot:5000]
+![alt text](03-route.png)
 
 ## Frontend
 
